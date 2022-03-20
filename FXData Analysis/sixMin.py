@@ -21,13 +21,16 @@ def show_average_6_mins(databaseName, currFrom, currTo):
         cur.execute('SELECT FXRate FROM fxdata WHERE EntryTime Between '+ (str)(i) + ' AND ' + (str)(i+360))
         fDataList = cur.fetchall()
         sum = 0
+        mean = 0
         for j in range(0,len(fDataList)):
             sum = sum + fDataList[j][0]
         if len(fDataList)!= 0:
             mean = sum / len(fDataList)
-            print(f"6 mins Average Value of FXData ({currFrom} to {currTo}):",mean)
+            # print(f"6 mins Average Value of FXData ({currFrom} to {currTo}):",mean)
         else:
-            print(f"6 mins Average Value of FXData ({currFrom} to {currTo}):",mean)
+            pass
+            # print(f"6 mins Average Value of FXData ({currFrom} to {currTo}):",mean)
+    return mean
 
 def show_std_6_mins(databaseName, currFrom, currTo):
     con = sqlite3.connect(databaseName)
@@ -50,7 +53,7 @@ def show_std_6_mins(databaseName, currFrom, currTo):
         for ele in range(0,len(fDataList)):
             list1.append((int)(fDataList[ele][0]))
         std = statistics.stdev(list1)
-        print(f"6 mins STD Value of FXData ({currFrom} to {currTo}):",std)
+        # print(f"6 mins STD Value of FXData ({currFrom} to {currTo}):",std)
 
 def show_std_1hr(databaseName, currFrom, currTo):
     con = sqlite3.connect(databaseName)
@@ -61,14 +64,14 @@ def show_std_1hr(databaseName, currFrom, currTo):
     last = (int)(DList[listlen-1][0])
     first = (int)(DList[0][0])
     stds = [0,0]
-    for i in range(first,last, 360):
+    for i in range(first,last, 3600):
         con = sqlite3.connect(databaseName)
         cur = con.cursor()
         cur.execute('SELECT EntryTime FROM fxdata')
         DataList = cur.fetchall()
         ent = (int)(first) + 360
         cur = con.cursor()
-        cur.execute('SELECT FXRate FROM fxdata WHERE EntryTime Between '+ (str)(i) + ' AND ' + (str)(i+360))
+        cur.execute('SELECT FXRate FROM fxdata WHERE EntryTime Between '+ (str)(i) + ' AND ' + (str)(i+3600))
         fDataList = cur.fetchall()
         list1 = [0,0]
         for ele in range(0,len(fDataList)):

@@ -1,5 +1,4 @@
-from DatabaseCreation import dbms_usdToCAD, dbms_usdToCHF, dbms_usdToGBP, dbms_usdToEUR, dbms_usdToAUD
-from DatabaseCreation import dbms_euroToUSD, dbms_audToUSD, dbms_gbpToUSD, dbms_chfToUSD, dbms_cadToUSD
+
 import sqlite3
 
 def show_average(databaseName, baseCurr, convertCurr):

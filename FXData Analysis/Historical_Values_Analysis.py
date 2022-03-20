@@ -1,6 +1,7 @@
 import sqlite3
 import matplotlib.pyplot as plt
 
+#Class to store historical values
 class CurrencyPair:
     def __init__(self,currency1, currency2):
         self.currency1 = currency1
@@ -8,6 +9,7 @@ class CurrencyPair:
         api_key = 'beBybSi8daPgsTp5yx5cHtHpYcrjp5Jq'
         api_url_1 = 'https://api.polygon.io/v1/conversion/' + self.currency1 + '/'+self.currency2+'?amount=100&precision=2&apiKey=' + api_key
 
+    #Saving the historical values
     def saveToList(self, databaseName, list1):
         # Create a SQL connection to our SQLite database
         con = sqlite3.connect(databaseName)
@@ -60,7 +62,7 @@ print(usdToGBP)
 historicalValues = CurrencyPair('EUR','USD')
 eurToUSD = []
 
-historicalValues.saveToList('eurToUSD.sqlite',eurToUSD)
+historicalValues.saveToList('euroToUSD.sqlite',eurToUSD)
 print(eurToUSD)
 
 historicalValues = CurrencyPair('CAD','USD')
